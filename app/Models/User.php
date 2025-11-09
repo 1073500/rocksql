@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'country',
+        'province',
     ];
 
     /**
@@ -45,4 +47,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //relaties
+    public function rock(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        //een op veel
+        return $this->hasMany(Rock::class);
+    }
+
+    public function comment(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        //een op veel
+        return $this->hasMany(Rock::class);
+    }
+
+
+
 }
