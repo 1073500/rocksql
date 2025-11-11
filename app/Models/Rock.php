@@ -13,6 +13,8 @@ class Rock extends Model
         'hardness',
         'category',
         'description',
+        'user_id',
+        'continent_id',
     ];
 
     //relaties
@@ -20,5 +22,10 @@ class Rock extends Model
     {
 
         return $this->belongsTo(User::class);
+    }
+
+    public function continent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Continent::class);
     }
 }

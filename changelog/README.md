@@ -9,3 +9,8 @@
 - views toegevoegd
 - controllers toegevoegd
 10-11-25:
+- create toegevoegd
+- read toegevoegd
+11-11-25:
+- update toegevoegd
+- delete toegevoegd
