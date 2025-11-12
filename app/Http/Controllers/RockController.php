@@ -8,10 +8,19 @@ use App\Models\Continent;
 
 class RockController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $rocks = Rock::all();
-        return view('rocks.index', compact('rocks'));
+
+        $continents = Continent::all();
+
+        //filter continents laat rock zien per continent
+        $continentId = $request->input('continent');
+
+        $rocks = Rock::when($continentId, function ($query, $continentId) {
+            return $query->where('continent_id', $continentId);
+        })->paginate(6);
+
+        return view('rocks.index', compact('rocks', 'continents'));
     }
 
     public function store(Request $request)
@@ -51,7 +60,7 @@ class RockController extends Controller
 
         $continents = Continent::all();
 
-        return view('rocks.create', compact('rock'), compact('continents') );
+        return view('rocks.create', compact('rock'), compact('continents'));
     }
 
     //Read

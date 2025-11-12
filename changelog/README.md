@@ -14,3 +14,6 @@
 11-11-25:
 - update toegevoegd
 - delete toegevoegd
+- validatie toegevoegd
+12-11-25:
+- filter op continent toegevoegd
