@@ -1,27 +1,18 @@
 <x-app-layout>
-    <div class="inline-flex items-center px-5 py-1 font-semibold text-xs text-white  uppercase tracking-widest ">
-        <h1 class="text-white text-2xl font-bold">Filter</h1>
-        <div class="p-4 flex">
-            <!-- dropdown filter continent -->
-            <form method="GET" action="{{ route('rocks.index') }}">
-                <select name="continent" onchange="this.form.submit()"
-                        class="border border-gray-700 bg-gray-900 p-2 m-2 rounded-full inline-flex items-center px-6 text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:duration-300 ease-in hover:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none">
-                    <option value="">Continents</option>
-                    @foreach($continents as $continent)
-                        <option value="{{ $continent->id }}"
-                            {{ request('continent') == $continent->id ? 'selected' : '' }}>
-                            {{ $continent->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </form>
-            <!-- alle filters verwijderen -->
-            <a href="{{ route('rocks.index') }}"
-               class="capitalize border border-red-800 bg-g p-2 m-2 rounded-full inline-flex items-center px-6 text-sm font-medium leading-5 text-gray-500 hover:text-white hover:duration-300 ease-in hover:bg-red-800 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none">Remove
-                filters</a>
-        </div>
-
+    <div class="flex justify-center m-4">
+        @include('components.search')
     </div>
+    <div class="border-t-gray-800 border-t" >
+        <div class="inline-flex items-center px-5 py-1 font-semibold text-xs text-white  uppercase tracking-widest ">
+            <h1 class="text-white text-2xl font-bold">Filter</h1>
+            <div class="p-4 flex">
+                <!-- dropdown filter continent -->
+                @include('components.filter')
+            </div>
+
+        </div>
+    </div>
+
     <div class="p-4">
         @foreach($rocks as $rock)
             <a href="{{ route('rocks.show', $rock) }}"

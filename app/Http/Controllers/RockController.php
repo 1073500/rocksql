@@ -10,15 +10,21 @@ class RockController extends Controller
 {
     public function index(Request $request)
     {
-
         $continents = Continent::all();
+        $rocks = Rock::query();
 
-        //filter continents laat rock zien per continent
+        //search
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $rocks->where('name', 'like', '%' . $search . '%');
+        }
+
+        //filter op continent
         $continentId = $request->input('continent');
-
-        $rocks = Rock::when($continentId, function ($query, $continentId) {
+        $rocks->when($continentId, function ($query, $continentId) {
             return $query->where('continent_id', $continentId);
-        })->paginate(6);
+        });
+        $rocks = $rocks->paginate(6);
 
         return view('rocks.index', compact('rocks', 'continents'));
     }

@@ -17,3 +17,8 @@
 - validatie toegevoegd
 12-11-25:
 - filter op continent toegevoegd
+- pagination toegevoegd
+13-11-25:
+- isAdmin werkend gemaakt
+15-11-25:
+- search functionaliteit op naam toegevoegd
