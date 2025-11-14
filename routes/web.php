@@ -26,13 +26,20 @@ Route::get('about', [\App\Http\Controllers\HomepageController::class, 'about'])-
 
 // CRUD : RockController routes
 Route::middleware('auth')->group(function () {
-//    Route::get('rocks', [\App\Http\Controllers\RockController::class, 'index'])->name('rocks.index');
-//    Route::post('rocks', [\App\Http\Controllers\RockController::class, 'store'])->name('rocks.store');
-//
-//    Route::get('rocks/create', [\App\Http\Controllers\RockController::class, 'create'])->name('rocks.create');
-//    Route::get('rocks/{rock}', [\App\Http\Controllers\RockController::class, 'show'])->name('rocks.show');
-//    Route::put('rocks/{rock}', [\App\Http\Controllers\RockController::class, 'update'])->name('rocks.update');
-//    Route::delete('rocks/{rock}', [\App\Http\Controllers\RockController::class, 'destroy'])->name('rocks.destroy');
-//    Route::get('rocks/{rock}/edit', [\App\Http\Controllers\RockController::class, 'edit'])->name('rocks.edit');
+    Route::get('rocks/{rock}/edit', [\App\Http\Controllers\RockController::class, 'edit'])->name('rocks.edit');
     Route::resource('rocks', App\Http\Controllers\RockController::class);
 });
+
+// Admin routes
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', function () {
+        if (!auth()->check() || !auth()->user()->isAdmin()) {
+            abort(403);
+        }
+
+        return view('admin.dashboard');
+    });
+});
+
+
+

@@ -21,8 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'country',
-        'province',
+        'is_admin',
     ];
 
     /**
@@ -60,6 +59,12 @@ class User extends Authenticatable
         //een op veel
         return $this->hasMany(Rock::class);
     }
+
+    public function isAdmin() : int
+    {
+        return $this->is_admin === 1;
+    }
+
 
 
 
