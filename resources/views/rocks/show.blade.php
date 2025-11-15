@@ -35,6 +35,12 @@
                 <button type="submit">Post comment</button>
             </form>
         </div>
+        @if ($errors->has('comment_error'))
+            <div class="text-red-500">
+                {{ $errors->first('comment_error') }}
+            </div>
+        @endif
+
 
         <!-- loopen -->
         <div class="text-white">

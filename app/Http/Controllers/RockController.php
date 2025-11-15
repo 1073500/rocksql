@@ -112,9 +112,16 @@ class RockController extends Controller
     //comments
     public function storeComment(Request $request, Rock $rock)
     {
-        $request->validate([
-            'comment' => 'required|string|max:1000',
-        ]);
+        //diepere validatie
+        $user = $request->user();
+
+        if ($user->rock()->count() < 5) {
+            return redirect()->route('rocks.show', $rock->id)
+                ->withErrors(['comment_error' => 'You must have added at least 5 rocks to comment.']);
+        }
+
+        //store en val gedeelte
+        $request->validate(['comment' => 'required|string|max:1000',]);
 
         $comment = new Comment();
         $comment->comment = $request->input('comment');
@@ -125,11 +132,14 @@ class RockController extends Controller
         return redirect()->route('rocks.show', $rock->id);
     }
 
-    public function destroyComment(Request $request, Rock $rock, Comment $comment)
+    public
+    function destroyComment(Request $request, Rock $rock, Comment $comment)
     {
         if ($comment->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
             abort(403);
         }
+
+        $rock = $comment->rock;
 
         $comment->delete();
 
