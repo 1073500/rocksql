@@ -25,4 +25,31 @@
             <a href="{{ route('rocks.index') }}" class="text-blue-400 hover:underline">← Back to all rocks</a>
         </div>
     </div>
+
+    <!-- Comment -->
+    <div>
+        <div>
+            <form method="POST" action="{{ route('comments.store', $rock) }}">
+                @csrf
+                <textarea name="comment" rows="3" required>{{ old('$comment') }}</textarea>
+                <button type="submit">Post comment</button>
+            </form>
+        </div>
+
+        <!-- loopen -->
+        <div class="text-white">
+            @foreach($rock->comments as $comment)
+                <p>{{ e($comment->comment) }} Posted by {{ $comment->user->name ?? 'Anonymous' }}</p>
+                @if(auth()->id() === $comment->user_id || auth()->user()->isAdmin())
+                    <form method="POST" action="{{ route('comments.destroy', $comment) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+                @endif
+            @endforeach
+        </div>
+    </div>
+
+
 </x-app-layout>

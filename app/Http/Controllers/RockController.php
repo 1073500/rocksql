@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Rock;
 use App\Models\Continent;
+use App\Models\Comment;
 
 class RockController extends Controller
 {
@@ -106,5 +107,32 @@ class RockController extends Controller
     {
         $rock->delete();
         return redirect()->route('rocks.index', $rock);
+    }
+
+    //comments
+    public function storeComment(Request $request, Rock $rock)
+    {
+        $request->validate([
+            'comment' => 'required|string|max:1000',
+        ]);
+
+        $comment = new Comment();
+        $comment->comment = $request->input('comment');
+        $comment->user_id = auth()->id();
+        $comment->rock_id = $rock->id;
+        $comment->save();
+
+        return redirect()->route('rocks.show', $rock->id);
+    }
+
+    public function destroyComment(Request $request, Rock $rock, Comment $comment)
+    {
+        if ($comment->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
+            abort(403);
+        }
+
+        $comment->delete();
+
+        return redirect()->route('rocks.show', $rock->id);
     }
 }

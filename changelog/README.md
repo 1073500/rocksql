@@ -22,3 +22,4 @@
 - isAdmin werkend gemaakt
 15-11-25:
 - search functionaliteit op naam toegevoegd
+- comments toegevoegd

@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 //HomepageController routes
 Route::get('homepage', [\App\Http\Controllers\HomepageController::class, 'homepage'])->name('homepage');
@@ -39,6 +39,12 @@ Route::middleware('auth')->group(function () {
 
         return view('admin.dashboard');
     });
+});
+
+// comments
+Route::middleware('auth')->group(function () {
+    Route::post('rocks/{rock}/comments', [\App\Http\Controllers\RockController::class, 'storeComment'])->name('comments.store');
+    Route::delete('comments/{comment}', [\App\Http\Controllers\RockController::class, 'destroyComment'])->name('comments.destroy');
 });
 
 
