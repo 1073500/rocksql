@@ -23,3 +23,10 @@
 15-11-25:
 - search functionaliteit op naam toegevoegd
 - comments toegevoegd
+- diepere validatie: user mag pas comments plaatsen na minstens x rocks geplaatst te hebben
+16-11-25:
+- admin dashboard laat users zien
+- users kunnen alleen hun eigen rocks bewerken en verwijderen
+- admin kan alle rocks bewerken en verwijderen
+17-11-25:
+

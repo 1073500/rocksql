@@ -62,6 +62,12 @@
                             {{ __('Dashboard') }}
                         </x-dropdown-link>
 
+                        @if(auth()->check() && auth()->user()->isAdmin())
+                            <x-dropdown-link :href="route('admin')">
+                                {{ __('Admin dashboard') }}
+                            </x-dropdown-link>
+                        @endif
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

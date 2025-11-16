@@ -34,11 +34,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/admin', function () {
         if (!auth()->check() || !auth()->user()->isAdmin()) {
-            abort(403);
+            abort(403, 'Unauthorized action.');
         }
 
         return view('admin.dashboard');
-    });
+    })->name('admin');
 });
 
 // comments

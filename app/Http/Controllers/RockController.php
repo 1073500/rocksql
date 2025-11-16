@@ -80,6 +80,10 @@ class RockController extends Controller
     //edit
     public function edit(Rock $rock)
     {
+        if ($rock->user_id !== auth()->id() && ! auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $continents = Continent::all();
         return view('rocks.edit', compact('rock', 'continents'));
     }
@@ -105,6 +109,10 @@ class RockController extends Controller
     //Delete
     public function destroy(Rock $rock)
     {
+        if ($rock->user_id !== auth()->id() && ! auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $rock->delete();
         return redirect()->route('rocks.index', $rock);
     }
@@ -115,7 +123,7 @@ class RockController extends Controller
         //diepere validatie
         $user = $request->user();
 
-        if ($user->rock()->count() < 5) {
+        if ($user->rock()->count() < 1) {
             return redirect()->route('rocks.show', $rock->id)
                 ->withErrors(['comment_error' => 'You must have added at least 5 rocks to comment.']);
         }
@@ -135,8 +143,8 @@ class RockController extends Controller
     public
     function destroyComment(Request $request, Rock $rock, Comment $comment)
     {
-        if ($comment->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
-            abort(403);
+        if ($comment->user_id !== auth()->id() && ! auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
         }
 
         $rock = $comment->rock;

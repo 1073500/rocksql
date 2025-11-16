@@ -57,7 +57,7 @@ class User extends Authenticatable
     public function comment(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         //een op veel
-        return $this->hasMany(Rock::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function isAdmin() : int
