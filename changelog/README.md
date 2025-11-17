@@ -29,4 +29,4 @@
 - users kunnen alleen hun eigen rocks bewerken en verwijderen
 - admin kan alle rocks bewerken en verwijderen
 17-11-25:
-
+- search in meerdere kolommen toegevoegd

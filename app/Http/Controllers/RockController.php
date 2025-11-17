@@ -15,10 +15,18 @@ class RockController extends Controller
         $rocks = Rock::query();
 
         //search
+        // php
         if ($request->filled('search')) {
             $search = $request->input('search');
-            $rocks->where('name', 'like', '%' . $search . '%');
+            $rocks->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('type', 'like', '%' . $search . '%')
+                    ->orWhere('color', 'like', '%' . $search . '%')
+                    ->orWhere('category', 'like', '%' . $search . '%')
+                    ->orWhere('hardness', 'like', '%' . $search . '%');
+            });
         }
+
 
         //filter op continent
         $continentId = $request->input('continent');
@@ -80,7 +88,7 @@ class RockController extends Controller
     //edit
     public function edit(Rock $rock)
     {
-        if ($rock->user_id !== auth()->id() && ! auth()->user()->isAdmin()) {
+        if ($rock->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -109,7 +117,7 @@ class RockController extends Controller
     //Delete
     public function destroy(Rock $rock)
     {
-        if ($rock->user_id !== auth()->id() && ! auth()->user()->isAdmin()) {
+        if ($rock->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -143,7 +151,7 @@ class RockController extends Controller
     public
     function destroyComment(Request $request, Rock $rock, Comment $comment)
     {
-        if ($comment->user_id !== auth()->id() && ! auth()->user()->isAdmin()) {
+        if ($comment->user_id !== auth()->id() && !auth()->user()->isAdmin()) {
             abort(403, 'Unauthorized action.');
         }
 
