@@ -8,18 +8,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request, User $user): View
     {
+        if ($user->id !== auth()->id() && ! auth()->user()->isAdmin()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
     }
+
+    //user edit
 
     /**
      * Update the user's profile information.

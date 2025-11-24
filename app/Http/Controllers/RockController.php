@@ -15,7 +15,6 @@ class RockController extends Controller
         $rocks = Rock::query();
 
         //search
-        // php
         if ($request->filled('search')) {
             $search = $request->input('search');
             $rocks->where(function ($query) use ($search) {

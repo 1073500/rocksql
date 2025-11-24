@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
 });
 
 Route::get('/dashboard', function () {
@@ -45,6 +46,12 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('rocks/{rock}/comments', [\App\Http\Controllers\RockController::class, 'storeComment'])->name('comments.store');
     Route::delete('comments/{comment}', [\App\Http\Controllers\RockController::class, 'destroyComment'])->name('comments.destroy');
+});
+
+// crud voor users
+Route::middleware('auth')->group(function () {
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 
