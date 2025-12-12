@@ -29,4 +29,18 @@ class UserController extends Controller
         $user->delete();
         return redirect('admin.dashboard')->with('status', 'User deleted successfully.');
     }
+
+    public function isActive($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_active = $user->is_active ? 0 : 1;
+//        if ($user->is_active === 0) {
+//            abort(403, 'Account is deactivated.');
+//        }
+        $user->save();
+
+
+        return redirect()->back();
+    }
+
 }

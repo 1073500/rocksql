@@ -28,18 +28,29 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Registered At</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Edit status</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Edit</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Delete</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach(auth()->user()->all() as $user)
+                            @foreach(\App\Models\User::all() as $user)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $user->id }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $user->name }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $user->email }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $user->created_at->format('d M Y H:i') }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 {{ $user->is_active ? 'text-green-600 ' : 'text-red-600'}}">{{ $user->is_active ? 'Active' : 'Inactive' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <form action="{{ route('users.isActive', $user->id) }}" method="POST">
+                                            @csrf
+                                            <button
+                                                type="submit"
+                                                class="px-3 py-1 rounded {{ $user->is_active ? 'bg-red-600 text-white hover:bg-white hover:border hover:border-red-600 hover:text-red-600 hover:transition' : 'bg-green-600 text-white hover:bg-white hover:border hover:border-green-600 hover:text-green-600 hover:transition' }}">
+                                                {{ $user->is_active ? 'Deactivate' : 'Activate' }}
+                                            </button>
+                                        </form>
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         <a href="{{ route('users.edit', $user) }}" class="text-blue-600 hover:text-blue-900">Edit</a>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

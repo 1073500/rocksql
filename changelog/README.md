@@ -34,3 +34,7 @@
 - user edit voor admin toegevoegd
 - user delete voor admin toegevoegd
 - SQL Injection bij search
+30-11-25:
+- Database seeder toegevoegd
+- Factory toegevoegd
+- Dummy data gegenereerd

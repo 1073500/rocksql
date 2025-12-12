@@ -1,9 +1,12 @@
 <x-app-layout>
+    <section>
     <div class="flex justify-center m-4">
         @include('components.search')
     </div>
+    </section>
+    <section>
     <div class="border-t-gray-800 border-t" >
-        <div class="inline-flex items-center px-5 py-1 font-semibold text-xs text-white  uppercase tracking-widest ">
+        <div class="inline-flex items-center px-5 py-1 font-semibold text-xs text-white  uppercase tracking-widest focus:outline-1">
             <h1 class="text-white text-2xl font-bold">Filter</h1>
             <div class="p-4 flex">
                 <!-- dropdown filter continent -->
@@ -12,7 +15,8 @@
 
         </div>
     </div>
-
+    </section>
+    <section>
     <div class="p-4">
         @foreach($rocks as $rock)
             <a href="{{ route('rocks.show', $rock) }}"
@@ -45,5 +49,6 @@
             {{ $rocks->withQueryString()->links() }}
         </div>
     </div>
+    </section>
 </x-app-layout>
 

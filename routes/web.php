@@ -54,5 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
-
-
+// actief of niet actief
+Route::middleware('auth')->group(function () {
+    Route::post('/users/{id}/isActive', [UserController::class, 'isActive'])->name('users.isActive');
+});
