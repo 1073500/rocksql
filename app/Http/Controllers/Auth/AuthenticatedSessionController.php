@@ -24,6 +24,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        //als is_active 0 is geen request authenticate
+        $user = Auth::getProvider()->retrieveByCredentials($request->only('email', 'password'));
+        if ($user->is_active === 0) {
+            return back()->withErrors([
+                'email' => 'Your account is deactivated. Please contact support.',
+            ])->onlyInput('email');
+        }
         $request->authenticate();
 
         $request->session()->regenerate();

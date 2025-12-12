@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
@@ -11,7 +12,7 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        if ($user->id !== auth()->id() && ! auth()->user()->isAdmin()) {
+        if ($user->id !== auth()->id() && !auth()->user()->isAdmin()) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -22,7 +23,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        if ($user->id !== auth()->id() && ! auth()->user()->isAdmin()) {
+        if ($user->id !== auth()->id() && !auth()->user()->isAdmin()) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -34,11 +35,8 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->is_active = $user->is_active ? 0 : 1;
-//        if ($user->is_active === 0) {
-//            abort(403, 'Account is deactivated.');
-//        }
-        $user->save();
 
+        $user->save();
 
         return redirect()->back();
     }

@@ -17,9 +17,9 @@ class ProfileController extends Controller
      */
     public function edit(Request $request, User $user): View
     {
-        if ($user->id !== auth()->id() && ! auth()->user()->isAdmin()) {
-            abort(403, 'Unauthorized action.');
-        }
+//        if ($user->id !== auth()->id() && ! auth()->user()->isAdmin()) {
+//            abort(403, 'Unauthorized action.');
+//        }
 
         return view('profile.edit', [
             'user' => $request->user(),
