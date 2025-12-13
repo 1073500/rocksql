@@ -26,6 +26,7 @@
                     class="rounded-lg p-4 text-white bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-md hover:border-blue-600 p-5 flex flex-col justify-between mb-2">
                     <!--toekomstige titel-->
                     <h1 class="text-2xl font-bold mb-4">Here goes your title</h1>
+                    <img src="{{ $rock->image }}" alt="{{ $rock['name'] }}" class="w-full h-64 object-cover mb-4 rounded-lg">
                     <div class="shadow-xl p-4 rounded-lg border mb-3 space-y-1 border-gray-800">
                         <x-paragraph>{{ $rock['name'] }}</x-paragraph>
                         <x-paragraph>{{ $rock['type'] }}</x-paragraph>

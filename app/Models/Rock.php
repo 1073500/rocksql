@@ -17,6 +17,7 @@ class Rock extends Model
         'hardness',
         'category',
         'description',
+        'image',
         'user_id',
         'continent_id',
     ];

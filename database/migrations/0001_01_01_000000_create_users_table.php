@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('is_admin')->default(0);
             $table->integer('is_active')->default(1);
+            $table->timestamp('last_login_at')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

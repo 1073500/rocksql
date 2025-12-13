@@ -48,6 +48,7 @@ class RockController extends Controller
             'hardness' => 'required|numeric|min:1|max:10',
             'category' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'image' => 'nullable|url|max:2048',
             'continent_id' => 'required|exists:continents,id',
         ]);
 
@@ -59,6 +60,7 @@ class RockController extends Controller
         $rock->hardness = $request->input('hardness');
         $rock->category = $request->input('category');
         $rock->description = $request->input('description');
+        $rock->image = $request->input('image');
         $rock->continent_id = $request->input('continent_id');
         $rock->user_id = auth()->id();
         $rock->save();
@@ -105,6 +107,7 @@ class RockController extends Controller
             'hardness' => 'required|numeric|min:1|max:10',
             'category' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'image' => 'nullable|url|max:2048',
             'continent_id' => 'required|exists:continents,id',
         ]);
         $rock->update($request->all());

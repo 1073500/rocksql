@@ -16,7 +16,7 @@
     <div class="mb-4">
         <h2 class="text-sm font-medium text-gray-900 dark:text-gray-100">Last Login</h2>
         <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            {{ $user->last_login_at ? $user->last_login_at->format('d M Y H:i') : 'No record' }}
+            {{ $user->last_login_at ? $user->last_login_at : 'No record' }}
         </p>
     </div>
 </div>

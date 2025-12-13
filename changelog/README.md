@@ -40,3 +40,4 @@
 - Dummy data gegenereerd
 12-12-25:
 - status: active of inactive toegevoegd aan user accounts
+- image voor rocks toegevoegd

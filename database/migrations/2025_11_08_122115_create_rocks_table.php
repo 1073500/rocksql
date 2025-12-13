@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('hardness');
             $table->string('category');
             $table->text('description')->nullable();
+            $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('continent_id')->constrained();
         });

@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-2xl mx-auto bg-gray-900 text-gray-200 p-6 rounded-xl mt-10 shadow-md">
         <h1 class="text-3xl font-bold mb-4">{{ $rock->name }}</h1>
-
+        <img src="{{ $rock->image }}" alt="{{ $rock['name'] }}" class="w-full h-100 object-cover mb-4 rounded-lg">
         <p><strong>Type:</strong> {{ $rock->type }}</p>
         <p><strong>Category:</strong> {{ $rock->category }}</p>
         <p><strong>Color:</strong> {{ $rock->color }}</p>

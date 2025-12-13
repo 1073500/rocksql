@@ -79,6 +79,15 @@
 
                 <a href="/rocks/{{ $rock->id }}" class="text-sm/6  font-semibold text-white">Cancel</a>
 
+                <!-- Image-->
+                <div class="mt-4">
+                    <x-input-label for="image" :value="__('Image URL')"/>
+                    <x-text-input id="image" placeholder="https://example.com/rock.jpg" class="block mt-1 w-full" type="text" name="image"
+                                  :value="old('image', $rock->image)"
+                                  autocomplete="image"/>
+                    <x-input-error :messages="$errors->get('image')" class="mt-2"/>
+                </div>
+
                 <!-- Submit Button -->
                 <div class="flex items-center justify-end mt-4">
                     <x-primary-button class="ms-4">
