@@ -11,6 +11,12 @@
     </select>
 </form>
 <!-- alle filters verwijderen -->
+<div class="capitalize border border-red-800 bg-g p-2 m-2 rounded-full inline-flex items-center px-6 text-sm font-medium leading-5 text-gray-500 hover:text-white hover:duration-300 ease-in hover:bg-red-800 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-1">
 <a href="{{ route('rocks.index') }}"
-   class="capitalize border border-red-800 bg-g p-2 m-2 rounded-full inline-flex items-center px-6 text-sm font-medium leading-5 text-gray-500 hover:text-white hover:duration-300 ease-in hover:bg-red-800 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-1">Remove
-    filters</a>
+   class="">Remove</a>
+    <div class="bg-red-600 rounded-full w-5 h-5 flex items-center justify-center ml-2 text-white">
+        @if('search' == request()->query() || 'continent' == request()->query())
+            <p class="opacity-75">{{ count(request()->query()) }}</p>
+        @endif
+    </div>
+</div>
