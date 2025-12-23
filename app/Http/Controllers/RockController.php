@@ -34,6 +34,7 @@ class RockController extends Controller
         });
         $rocks = $rocks->paginate(6);
 
+
         return view('rocks.index', compact('rocks', 'continents'));
     }
 

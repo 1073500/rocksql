@@ -22,8 +22,8 @@
 
     <!-- Page Heading -->
     @isset($header)
-        <header class="bg-white dark:bg-gray-800 shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <header class=" dark:bg-gray-950 shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-4xl font-bold text-white text-center">
                 {{ $header }}
             </div>
         </header>
@@ -35,7 +35,7 @@
     </main>
 </div>
 <div
-    class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-950 backdrop-blur-sm bg-opacity-60 rounded-full border border-gray-600 m-4">
+    class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-950 backdrop-blur-sm bg-opacity-60 rounded-full border border-gray-700 m-4">
     @include('layouts.app-nav')
 </div>
 </body>

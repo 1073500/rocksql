@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h1>Post a Rock</h1>
+    </x-slot>
     <div class="">
         <form method="POST" action="{{ route('rocks.store') }}">
             @csrf

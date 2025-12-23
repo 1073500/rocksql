@@ -15,8 +15,6 @@
 <a href="{{ route('rocks.index') }}"
    class="">Remove</a>
     <div class="bg-red-600 rounded-full w-5 h-5 flex items-center justify-center ml-2 text-white">
-        @if('search' == request()->query() || 'continent' == request()->query())
-            <p class="opacity-75">{{ count(request()->query()) }}</p>
-        @endif
+        <p>0</p>
     </div>
 </div>

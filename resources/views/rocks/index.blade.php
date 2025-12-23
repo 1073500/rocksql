@@ -1,7 +1,7 @@
 <x-app-layout>
-        <div class=" bg-gray-800 p-6">
-            <h1 class="text-4xl font-bold mb-4 text-white">Rocks</h1>
-        </div>
+    <x-slot name="header">
+            <h1 >Rocks</h1>
+    </x-slot>
         <div class="">
             <div class="bg-gray-950 flex justify-center p-4">
                 @include('components.search')
