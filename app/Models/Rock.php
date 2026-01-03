@@ -11,6 +11,7 @@ class Rock extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
     protected $fillable = [
+        'title',
         'name',
         'type',
         'color',

@@ -19,6 +19,7 @@ class RockController extends Controller
             $search = $request->input('search');
             $rocks->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('title', 'like', '%' . $search . '%')
                     ->orWhere('type', 'like', '%' . $search . '%')
                     ->orWhere('color', 'like', '%' . $search . '%')
                     ->orWhere('category', 'like', '%' . $search . '%')
@@ -43,6 +44,7 @@ class RockController extends Controller
         //dd(auth()->id());
 
         $request->validate([
+            'title' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'color' => 'required|string|max:255',
@@ -55,6 +57,7 @@ class RockController extends Controller
 
         //insert into
         $rock = new Rock();
+        $rock->title = $request->input('title');
         $rock->name = $request->input('name');
         $rock->type = $request->input('type');
         $rock->color = $request->input('color');
@@ -102,6 +105,7 @@ class RockController extends Controller
     public function update(Request $request, Rock $rock)
     {
         $request->validate([
+            'title' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'color' => 'required|string|max:255',

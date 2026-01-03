@@ -5,6 +5,15 @@
             @method('PATCH')
             <fieldset>
                 <legend class="text-lg font-medium text-white mb-4">Edit your rock post</legend>
+                <!-- Title -->
+                <div>
+                    <x-input-label for="title" :value="__('Title')"/>
+                    <x-text-input id="title" placeholder="Beautiful Geode" class="block mt-1 w-full" type="text" name="title"
+                                  :value="old('title', $rock->title)"
+                                  autofocus autocomplete="title"/>
+                    <x-input-error :messages="$errors->get('title')" class="mt-2"/>
+                </div>
+
                 <!-- Name -->
                 <div>
                     <x-input-label for="name" :value="__('Name')"/>
