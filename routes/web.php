@@ -14,12 +14,15 @@ Route::get('/', function () {
 
 Route::middleware('auth', 'verified')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard/picture', [\App\Http\Controllers\DashboardController::class, 'getProfilePicture'])->name('dashboard.picture');
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile/picture', [ProfileController::class, 'updatePicture'])->name('profile.picture.update');
+
 });
 
 require __DIR__ . '/auth.php';

@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use App\Models\User;
 
@@ -63,5 +64,30 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function updatePicture(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+
+        $request->validate([
+            'profile_picture' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+        ]);
+
+        //dan raakt de storage niet vol
+        if ($user->profile_picture) {
+            Storage::disk('public')->delete($user->profile_picture);
+        }
+
+        $path = $request->file('profile_picture')->store('profile_pictures', 'public');
+
+        $user->profile_picture = $path;
+        $user->save();
+
+        if ($request->wantsJson()) {
+            return response()->json(['profile_picture' => Storage::url($path)]);
+        }
+
+        return back()->with('status', 'Profile picture updated.');
     }
 }

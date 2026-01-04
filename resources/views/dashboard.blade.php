@@ -7,9 +7,13 @@
 
     <div
         class="flex items-center justify-center flex-col m-8 rounded-lg p-4 text-white backdrop-blur-sm bg-opacity-90 border border-gray-800 rounded-xl shadow-md ">
-        <div class="mask-radial-at-center mask-radial-from-100% w-32 h-32 mb-4">
-            <img src="{{ asset('images/profile.png') }} " alt="Profile Image">
-        </div>
+        <img src="{{ $user->profile_picture ? asset('storage/'.$user->profile_picture) : asset('images/profile.png') }}" alt="Profile" class="w-32 h-32 rounded-full mb-4">
+
+        <form action="{{ route('profile.picture.update') }}" method="POST" enctype="multipart/form-data" class="mt-4">
+            @csrf
+            <input type="file" name="profile_picture" accept="image/*" required>
+            <button type="submit" class="ml-2 px-3 py-1 bg-blue-600 text-white rounded">Upload</button>
+        </form>
         <h1 class="text-2xl font-bold mb-4 text-white">{{ $user->name }}</h1>
         <h2 class="text-1xl font-bold mb-4 text-gray-400">{{ $user->email }}</h2>
         <x-primary-button><a href="{{ route('profile.edit') }}">Edit profile</a></x-primary-button>

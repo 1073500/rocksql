@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Rock;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -15,5 +16,16 @@ class DashboardController extends Controller
         $user->load('rock.continent');
         $rocks = $user->rock ?? collect();
         return view('dashboard', compact('user', 'rocks'));
+    }
+
+    public function getProfilePicture(Request $request)
+    {
+        $user = $request->user();
+
+        $url = $user->profile_picture
+            ? Storage::url($user->profile_picture)            // returns /storage/profile_pictures/...
+            : asset('images/profile.png');                   // fallback
+
+        return response()->json(['profile_picture' => $url]);
     }
 }

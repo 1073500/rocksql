@@ -51,7 +51,7 @@ class RockController extends Controller
             'hardness' => 'required|numeric|min:1|max:10',
             'category' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|url|max:2048',
+//            'image' => 'nullable|url|max:2048',
             'continent_id' => 'required|exists:continents,id',
         ]);
 
