@@ -24,41 +24,69 @@
                 </div>
 
                 <!-- Type -->
-                <div class="mt-4">
-                    <x-input-label for="type" :value="__('Type')"/>
-                    <x-text-input id="type" placeholder="Sedimentary" class="block mt-1 w-full" type="text" name="type"
-                                  :value="old('type', $rock->type)"
-                                  autocomplete="type"/>
-                    <x-input-error :messages="$errors->get('type')" class="mt-2"/>
+                <div class="mt-4 text-white">
+                    <x-input-label for="type_id" :value="__('Type')"/>
+                    <select id="type_id" name="type_id"
+                            class="bg-gray-800 block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-10">
+                        <option class="text-white" value=""></option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->id }}"
+                                {{ old('type_id', $rock->type_id) == $type->id ? 'selected' : '' }}>
+                                {{ $type->type }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('type_id')" class="mt-2"/>
                 </div>
 
                 <!-- Category -->
-                <div class="mt-4">
-                    <x-input-label for="category" :value="__('Category')"/>
-                    <x-text-input id="category" placeholder="Mineral" class="block mt-1 w-full" type="text"
-                                  name="category"
-                                  :value="old('category', $rock->category)"
-                                  autocomplete="category"/>
-                    <x-input-error :messages="$errors->get('category')" class="mt-2"/>
+                <div class="mt-4 text-white">
+                    <x-input-label for="category_id" :value="__('Category')"/>
+                    <select id="category_id" name="category_id"
+                            class="bg-gray-800 block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-10">
+                        <option class="text-white" value=""></option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ old('category_id', $rock->type_id) == $category->id ? 'selected' : '' }}>
+                                {{ $category->category }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('category_id')" class="mt-2"/>
                 </div>
 
                 <!-- Color -->
-                <div class="mt-4">
-                    <x-input-label for="color" :value="__('Color')"/>
-                    <x-text-input id="color" placeholder="White" class="block mt-1 w-full" type="text" name="color"
-                                  :value="old('color', $rock->color)"
-                                  autocomplete="color"/>
-                    <x-input-error :messages="$errors->get('color')" class="mt-2"/>
+                <div class="mt-4 text-white">
+                    <x-input-label for="color_id" :value="__('Color')"/>
+                    <select id="color_id" name="color_id"
+                            class="bg-gray-800 block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-10">
+                        <option class="text-white" value=""></option>
+                        @foreach ($colors as $color)
+                            <option value="{{ $color->id }}"
+                                {{ old('color_id', $rock->color_id) == $color->id ? 'selected' : '' }}>
+                                {{ $color->color }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('color_id')" class="mt-2"/>
                 </div>
 
                 <!-- Hardness -->
-                <div class="mt-4">
-                    <x-input-label for="hardness" :value="__('Hardness')"/>
-                    <x-text-input id="hardness" placeholder="7" class="block mt-1 w-full" type="text" name="hardness"
-                                  :value="old('hardness', $rock->hardness)"
-                                  autocomplete="hardness"/>
-                    <x-input-error :messages="$errors->get('hardness')" class="mt-2"/>
+                <div class="mt-4 text-white">
+                    <x-input-label for="hardness_id" :value="__('Hardness')"/>
+                    <select id="hardness_id" name="hardness_id"
+                            class="bg-gray-800 block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-10">
+                        <option class="text-white" value=""></option>
+                        @foreach ($hardnesses as $hardness)
+                            <option value="{{ $hardness->id }}"
+                                {{ old('hardness_id', $rock->hardness_id) == $hardness->id ? 'selected' : '' }}>
+                                {{ $hardness->hardness }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('hardness_id')" class="mt-2"/>
                 </div>
+
 
                 <!-- Description -->
                 <div class="mt-4">
@@ -71,7 +99,7 @@
                 </div>
 
                 <!-- Continent -->
-                <div class="mt-4">
+                <div class="mt-4 text-white">
                     <x-input-label for="continent_id" :value="__('Continent')"/>
                     <select id="continent_id" name="continent_id"
                             class="bg-gray-800 block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-10">

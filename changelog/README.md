@@ -43,3 +43,5 @@
 - image voor rocks toegevoegd
 04-01-26:
 - profile dashboard toegevoegd
+- profiel foto upload toegevoegd
+- filteren op meerdere categorieën toegevoegd

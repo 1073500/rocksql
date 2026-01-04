@@ -31,12 +31,16 @@
                              class="w-full h-64 object-cover mb-4 rounded-lg">
                         <div class="shadow-xl p-4 rounded-lg border mb-3 space-y-1 border-gray-800">
                             <x-paragraph>{{ $rock['name'] }}</x-paragraph>
-                            <x-paragraph>{{ $rock['type'] }}</x-paragraph>
-                            <x-paragraph>{{ $rock['category'] }}</x-paragraph>
-                            <x-paragraph>{{ $rock['color'] }}</x-paragraph>
+                            <a class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-300 border hover:bg-blue-600 hover:text-white border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-blue-600 focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                               href="{{ route('rocks.index', ['type' => $rock->type_id]) }}">{{ $rock->type->type ?? 'Unknown' }}</a>
+                            <a class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-300 border hover:bg-blue-600 hover:text-white border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-blue-600 focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                               href="{{ route('rocks.index', ['category' => $rock->category_id]) }}">{{ $rock->category->category ?? 'Unknown' }}</a>
+                            <a class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-300 border hover:bg-blue-600 hover:text-white border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-blue-600 focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                               href="{{ route('rocks.index', ['color' => $rock->color_id]) }}">{{ $rock->color->color ?? 'Unknown' }}</a>
                             <a class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-300 border hover:bg-blue-600 hover:text-white border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-blue-600 focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
                                href="{{ route('rocks.index', ['continent' => $rock->continent_id]) }}">{{ $rock->continent->name ?? 'Unknown' }}</a>
-                            <p><strong>Hardness:</strong> {{ $rock['hardness'] }}</p>
+                            <a class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-300 border hover:bg-blue-600 hover:text-white border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-blue-600 focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                               href="{{ route('rocks.index', ['hardness' => $rock->hardness_id]) }}">{{ $rock->hardness_id ?? 'Unknown' }}</a>
                             <p><strong>Description:</strong> {{ $rock['description'] }}</p>
 
                             <p class="text-gray-700"><strong>Created

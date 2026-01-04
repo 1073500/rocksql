@@ -16,10 +16,10 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title');
             $table->string('name');
-            $table->string('type');
-            $table->string('color');
-            $table->string('hardness');
-            $table->string('category');
+            $table->foreignId('type_id')->constrained();
+            $table->foreignId('color_id')->constrained();
+            $table->foreignId('hardness_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained();

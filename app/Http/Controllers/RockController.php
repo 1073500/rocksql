@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Color;
+use App\Models\Hardness;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Models\Rock;
 use App\Models\Continent;
@@ -11,19 +15,20 @@ class RockController extends Controller
 {
     public function index(Request $request)
     {
-        $continents = Continent::all();
         $rocks = Rock::query();
+
+        $continents = Continent::all();
+        $types = Type::all();
+        $colors = Color::all();
+        $hardnesses = Hardness::all();
+        $categories = Category::all();
 
         //search
         if ($request->filled('search')) {
             $search = $request->input('search');
             $rocks->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('title', 'like', '%' . $search . '%')
-                    ->orWhere('type', 'like', '%' . $search . '%')
-                    ->orWhere('color', 'like', '%' . $search . '%')
-                    ->orWhere('category', 'like', '%' . $search . '%')
-                    ->orWhere('hardness', 'like', '%' . $search . '%');
+                    ->orWhere('title', 'like', '%' . $search . '%');
             });
         }
 
@@ -33,10 +38,54 @@ class RockController extends Controller
         $rocks->when($continentId, function ($query, $continentId) {
             return $query->where('continent_id', $continentId);
         });
+
+
+        //filter op type
+        $typeId = $request->input('type');
+        $rocks->when($typeId, function ($query, $typeId) {
+            return $query->where('type_id', $typeId);
+        });
+
+        //filter op color
+        $colorId = $request->input('color');
+        $rocks->when($colorId, function ($query, $colorId) {
+            return $query->where('color_id', $colorId);
+        });
+
+        //filter op hardness
+        $hardnessId = $request->input('hardness');
+        $rocks->when($hardnessId, function ($query, $hardnessId) {
+            return $query->where('hardness_id', $hardnessId);
+        });
+
+        //filter op category
+        $categoryId = $request->input('category');
+        $rocks->when($categoryId, function ($query, $categoryId) {
+            return $query->where('category_id', $categoryId);
+        });
+
         $rocks = $rocks->paginate(6);
 
+        //voor remove knop filteren
+        $activeFilters = 0;
 
-        return view('rocks.index', compact('rocks', 'continents'));
+        $filterKeys = [
+            'continent',
+            'type',
+            'color',
+            'hardness',
+            'category',
+            'search',
+        ];
+
+        foreach ($filterKeys as $key) {
+            if ($request->filled($key)) {
+                $activeFilters++;
+            }
+        }
+
+
+        return view('rocks.index', compact('rocks', 'continents', 'types', 'colors', 'hardnesses', 'categories', 'activeFilters'));
     }
 
     public function store(Request $request)
@@ -46,10 +95,10 @@ class RockController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'name' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
-            'hardness' => 'required|numeric|min:1|max:10',
-            'category' => 'required|string|max:255',
+            'type_id' => 'required|exists:types,id',
+            'color_id' => 'required|exists:colors,id',
+            'hardness_id' => 'required|exists:hardness,id',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
 //            'image' => 'nullable|url|max:2048',
             'continent_id' => 'required|exists:continents,id',
@@ -59,10 +108,10 @@ class RockController extends Controller
         $rock = new Rock();
         $rock->title = $request->input('title');
         $rock->name = $request->input('name');
-        $rock->type = $request->input('type');
-        $rock->color = $request->input('color');
-        $rock->hardness = $request->input('hardness');
-        $rock->category = $request->input('category');
+        $rock->type_id = $request->input('type_id');
+        $rock->color_id = $request->input('color_id');
+        $rock->hardness_id = $request->input('hardness_id');
+        $rock->category_id = $request->input('category_id');
         $rock->description = $request->input('description');
         $rock->image = $request->input('image');
         $rock->continent_id = $request->input('continent_id');
@@ -79,8 +128,12 @@ class RockController extends Controller
         $rock = Rock::all();
 
         $continents = Continent::all();
+        $types = Type::all();
+        $colors = Color::all();
+        $hardnesses = Hardness::all();
+        $categories = Category::all();
 
-        return view('rocks.create', compact('rock'), compact('continents'));
+        return view('rocks.create', compact('rock'), compact('continents', 'types', 'colors', 'hardnesses', 'categories'));
     }
 
     //Read
@@ -98,7 +151,11 @@ class RockController extends Controller
         }
 
         $continents = Continent::all();
-        return view('rocks.edit', compact('rock', 'continents'));
+        $types = Type::all();
+        $colors = Color::all();
+        $hardnesses = Hardness::all();
+        $categories = Category::all();
+        return view('rocks.edit', compact('rock', 'continents', 'types', 'colors', 'hardnesses', 'categories'));
     }
 
     //Update
@@ -107,10 +164,10 @@ class RockController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'name' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
-            'hardness' => 'required|numeric|min:1|max:10',
-            'category' => 'required|string|max:255',
+            'type_id' => 'required|exists:types,id',
+            'color_id' => 'required|exists:colors,id',
+            'hardness_id' => 'required|exists:hardness,id',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
             'image' => 'nullable|url|max:2048',
             'continent_id' => 'required|exists:continents,id',
