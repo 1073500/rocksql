@@ -166,7 +166,7 @@ class RockController extends Controller
             'name' => 'required|string|max:255',
             'type_id' => 'required|exists:types,id',
             'color_id' => 'required|exists:colors,id',
-            'hardness_id' => 'required|exists:hardness,id',
+            'hardness_id' => 'required|exists:hardnesses,id',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
             'image' => 'nullable|url|max:2048',

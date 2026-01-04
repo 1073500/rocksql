@@ -4,9 +4,16 @@
 
 /* resources/css/app.css */
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 .page-background {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Alpha_Perse_-_star.png/1200px-Alpha_Perse_-_star.png?20251009183127");
+    min-height: 100vh;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/29/Alpha_Perse_-_star.png");
     background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="">
+    <div class="m-6 p-6 backdrop-blur-sm bg-opacity-90 border border-gray-800 rounded-xl overflow-hidden shadow-md">
         <form method="POST" action="{{ route('rocks.update', $rock->id) }}">
             @csrf
             @method('PATCH')

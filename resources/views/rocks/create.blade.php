@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h1>Post a Rock</h1>
     </x-slot>
-    <div class="">
+    <div class="m-6 p-6 backdrop-blur-sm bg-opacity-90 border border-gray-800 rounded-xl overflow-hidden shadow-md ">
         <form method="POST" action="{{ route('rocks.store') }}">
             @csrf
 
@@ -29,7 +29,7 @@
                 <!-- Type -->
                 <div class="mt-4 text-gray-500">
                     <x-input-label for="type_id" :value="__('Type')"/>
-                    <select id="type_id" name="type_id"
+                    <select id="type_id" name="type"
                             class="bg-gray-800 block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-10">
                         <option class="text-white" value="">-- Select a Type --</option>
                         @foreach ($types as $type)
@@ -55,7 +55,7 @@
                             </option>
                         @endforeach
                     </select>
-                    <x-input-error :messages="$errors->get('type_id')" class="mt-2"/>
+                    <x-input-error :messages="$errors->get('category_id')" class="mt-2"/>
                 </div>
 
                 <!-- Color -->
@@ -71,7 +71,7 @@
                             </option>
                         @endforeach
                     </select>
-                    <x-input-error :messages="$errors->get('type_id')" class="mt-2"/>
+                    <x-input-error :messages="$errors->get('color_id')" class="mt-2"/>
                 </div>
 
                 <!-- Hardness -->
@@ -87,7 +87,7 @@
                             </option>
                         @endforeach
                     </select>
-                    <x-input-error :messages="$errors->get('type_id')" class="mt-2"/>
+                    <x-input-error :messages="$errors->get('hardness_id')" class="mt-2"/>
                 </div>
 
                 <!-- Description -->
