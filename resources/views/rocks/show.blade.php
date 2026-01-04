@@ -22,8 +22,8 @@
         </div>
 
         <div class="mt-6">
-            <a href="{{ route('rocks.index') }}" class="text-blue-400 hover:underline">← Back to all rocks</a>
-        </div>
+            <a href="{{ url()->previous() }}" class="text-blue-400 hover:underline">← Back</a>
+
     </div>
 
     <!-- Comment -->

@@ -41,3 +41,5 @@
 12-12-25:
 - status: active of inactive toegevoegd aan user accounts
 - image voor rocks toegevoegd
+04-01-26:
+- profile dashboard toegevoegd

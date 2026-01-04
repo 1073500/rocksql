@@ -16,6 +16,7 @@
             </div>
         </div>
 
+    <!-- cards -->
     <section>
         <div class="p-4">
             @foreach($rocks as $rock)
