@@ -29,7 +29,7 @@
                 <!-- Type -->
                 <div class="mt-4 text-gray-500">
                     <x-input-label for="type_id" :value="__('Type')"/>
-                    <select id="type_id" name="type"
+                    <select id="type_id" name="type_id"
                             class="bg-gray-800 block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-10">
                         <option class="text-white" value="">-- Select a Type --</option>
                         @foreach ($types as $type)
@@ -66,7 +66,7 @@
                         <option class="text-white" value="">-- Select a Color --</option>
                         @foreach ($colors as $color)
                             <option class="text-white border-gray-900" value="{{ $color->id }}"
-                                {{ old('color_id') == $type->id ? 'selected' : '' }}>
+                                {{ old('color_id') == $color->id ? 'selected' : '' }}>
                                 {{ $color->color }}
                             </option>
                         @endforeach
@@ -82,7 +82,7 @@
                         <option class="text-white" value="">-- Select a Hardness --</option>
                         @foreach ($hardnesses as $hardness)
                             <option class="text-white border-gray-900" value="{{ $hardness->id }}"
-                                {{ old('type_id') == $hardness->id ? 'selected' : '' }}>
+                                {{ old('hardness_id') == $hardness->id ? 'selected' : '' }}>
                                 {{ $hardness->hardness }}
                             </option>
                         @endforeach

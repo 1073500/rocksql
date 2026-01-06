@@ -97,7 +97,7 @@ class RockController extends Controller
             'name' => 'required|string|max:255',
             'type_id' => 'required|exists:types,id',
             'color_id' => 'required|exists:colors,id',
-            'hardness_id' => 'required|exists:hardness,id',
+            'hardness_id' => 'required|exists:hardnesses,id',
             'category_id' => 'required|exists:categories,id',
             'description' => 'nullable|string',
 //            'image' => 'nullable|url|max:2048',
@@ -195,7 +195,10 @@ class RockController extends Controller
         //diepere validatie
         $user = $request->user();
 
-        if ($user->rock()->count() < 1) {
+        //elq qry
+        $rockCount = Rock::where('user_id', $user->id)->count();
+
+        if ($rockCount < 2) {
             return redirect()->route('rocks.show', $rock->id)
                 ->withErrors(['comment_error' => 'You must have added at least 5 rocks to comment.']);
         }

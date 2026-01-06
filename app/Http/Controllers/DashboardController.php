@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         $user = $request->user();
         $user->load('rock.continent');
-        $rocks = $user->rock ?? collect();
+        $rocks = $user->rock ?? collect(); //lege array, dn blijft ie werken
         return view('dashboard', compact('user', 'rocks'));
     }
 
@@ -23,8 +23,8 @@ class DashboardController extends Controller
         $user = $request->user();
 
         $url = $user->profile_picture
-            ? Storage::url($user->profile_picture)            // returns /storage/profile_pictures/...
-            : asset('images/profile.png');                   // fallback
+            ? Storage::url($user->profile_picture)
+            : asset('images/profile.png');
 
         return response()->json(['profile_picture' => $url]);
     }
