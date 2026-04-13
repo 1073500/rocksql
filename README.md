@@ -96,7 +96,7 @@ zoeken op naam en op andere gebruikers reageren via comments. Admins hebben uitg
 
 4**Migrations en seeders uitvoeren**
    ```bash
-   php artisan migrate --seed
+   php artisan migrate:fresh --seed
    ```
 
 5**Applicatie starten**
