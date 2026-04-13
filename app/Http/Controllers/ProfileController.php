@@ -74,7 +74,7 @@ class ProfileController extends Controller
             'profile_picture' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
         ]);
 
-        //dan raakt de storage niet vol
+
         if ($user->profile_picture) {
             Storage::disk('public')->delete($user->profile_picture);
         }

@@ -1,59 +1,155 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🪨 RockSQL
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Een Laravel-webapplicatie waarmee gebruikers hun gevonden rocks kunnen delen, ontdekken en beheren.
+Gebouwd als schoolproject met Laravel Breeze voor authenticatie en Blade als templating engine.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Inhoudsopgave
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Over het project](#over-het-project)
+- [Functionaliteiten](#functionaliteiten)
+- [Technische stack](#technische-stack)
+- [Installatie](#installatie)
+- [Gebruik](#gebruik)
+- [Rollen & rechten](#rollen--rechten)
+- [Beveiliging](#beveiliging)
+- [Changelog](#changelog)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Over het project
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+RockSQL is een webapplicatie waarbij gebruikers hun eigen rocks kunnen toevoegen, 
+bekijken, bewerken en verwijderen. Gebruikers kunnen rocks filteren op continent en categorie, 
+zoeken op naam en op andere gebruikers reageren via comments. Admins hebben uitgebreide beheermogelijkheden via een eigen dashboard.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Functionaliteiten
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Rocks
+- Rocks toevoegen, bekijken, bewerken en verwijderen (CRUD)
+- Afbeelding uploaden bij een rock
+- Filteren op continent en meerdere categorieën tegelijk
+- Zoeken op naam én meerdere andere kolommen
+- Paginatie
 
-### Premium Partners
+### Gebruikers
+- Registreren en inloggen via Laravel Breeze
+- Profielpagina met profielfoto upload
+- Gebruikersstatus: actief of inactief
+- Gebruikers kunnen alleen hun eigen rocks bewerken/verwijderen
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Comments
+- Comments plaatsen onder rocks
+- Toegang tot comments vereist een minimum aantal geplaatste rocks (Broken Access Control bescherming)
 
-## Contributing
+### Admin
+- Admin dashboard met overzicht van alle gebruikers
+- Admin kan alle rocks bewerken en verwijderen
+- Admin kan gebruikers bewerken en verwijderen
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Technische stack
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Onderdeel | Technologie |
+|---|---|
+| Framework | Laravel |
+| Authenticatie | Laravel Breeze |
+| Templating | Blade |
+| Database | MySQL |
+| Beveiliging | SQL Injection-bescherming, Broken Access Control |
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Installatie
 
-## License
+### Vereisten
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- PHP >= 8.1
+- Composer
+- Node.js & npm
+- MySQL
+
+### Stappen
+
+1. **Repository klonen**
+   ```bash
+   git clone https://github.com/1073500/rocksql.git
+   cd rocksql
+   ```
+
+2. **Dependencies installeren**
+   ```bash
+   composer install
+   npm install && npm run build
+   ```
+
+3. **Omgevingsvariabelen instellen**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+
+4**Migrations en seeders uitvoeren**
+   ```bash
+   php artisan migrate --seed
+   ```
+
+5**Applicatie starten**
+   ```bash
+   php artisan serve
+   ```
+
+
+---
+
+## Gebruik
+
+### Standaard accounts (via seeder)
+
+| Rol | E-mail | Wachtwoord |
+|---|---|---|
+| Admin | rockyiii@hr.nl | password |
+| Gebruiker | rockyiv@hr.nl | password |
+
+> Pas de seeder aan als je andere standaardgegevens wilt gebruiken.
+
+---
+
+## Rollen & rechten
+
+| Actie | Gast | Gebruiker | Admin |
+|---|:---:|:---:|:---:|
+| Rocks bekijken | ✅ | ✅ | ✅ |
+| Rock toevoegen | ❌ | ✅ | ✅ |
+| Eigen rock bewerken/verwijderen | ❌ | ✅ | ✅ |
+| Alle rocks bewerken/verwijderen | ❌ | ❌ | ✅ |
+| Comments plaatsen* | ❌ | ✅* | ✅ |
+| Admin dashboard | ❌ | ❌ | ✅ |
+| Gebruikers beheren | ❌ | ❌ | ✅ |
+
+*\* Gebruikers moeten minimaal een bepaald aantal rocks geplaatst hebben voordat zij comments kunnen plaatsen.*
+
+---
+
+## Beveiliging
+
+### SQL Injection
+Alle zoekopdrachten maken gebruik van Laravel's query builder met parameterbinding, zodat SQL Injection aanvallen worden voorkomen.
+
+### Broken Access Control
+Gebruikers kunnen pas comments plaatsen nadat ze een minimum aantal rocks hebben toegevoegd. Dit voorkomt misbruik van nieuwe of inactieve accounts.
+
+### Autorisatie
+- Gebruikers kunnen uitsluitend hun eigen rocks bewerken en verwijderen.
+- Beheerfuncties zijn alleen toegankelijk voor gebruikers met de `isAdmin`-rol.
+
+---
+
+## Licentie
+
+Dit project is gemaakt als schoolopdracht en heeft geen commerciële licentie.

@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         $user = $request->user();
         $user->load('rock.continent');
-        $rocks = $user->rock ?? collect(); //lege array, dn blijft ie werken
+        $rocks = $user->rock ?? collect(); 
         return view('dashboard', compact('user', 'rocks'));
     }
 
